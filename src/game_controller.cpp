@@ -1,19 +1,20 @@
-#include <cstring>
-#include <sys/socket.h>
-
 #include "game_controller.h"
 
-GameController *GameController::instance = nullptr;
-
-GameController::GameController() {
-    server_socket = socket(AF_INET, SOCK_STREAM, 0);
-}
-
-GameController *GameController::getInstance() {
-    if (instance == nullptr) instance = new GameController();
-    return instance;
+GameController::GameController(unsigned short port) {
+    server = new LimitedClientTCPServer(1);
+    server->wait_all_connections(port);
 }
 
 GameController::~GameController() {
+    delete server;
+}
 
+void GameController::start() {
+    char buffer[1024];
+    while (true) {
+        int message_length = server->receive(0, buffer);
+        if (message_length == -1) continue;
+
+        server->send(0, (char *) &message_length, sizeof(int));
+    }
 }

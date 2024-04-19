@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -std=c++17
+CXXFLAGS = -Wall -Iinclude -std=c++20
 
 SRC = $(wildcard src/*.cpp)
 OBJ = $(addprefix tmp/, $(notdir $(SRC:.cpp=.o)))
