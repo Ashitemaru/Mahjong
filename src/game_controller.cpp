@@ -1,3 +1,4 @@
+#include <cstring>
 #include <sys/socket.h>
 
 #include "game_controller.h"

@@ -1,9 +1,9 @@
 #include <iostream>
 
 #include "game_controller.h"
+#include "socket_helper.h"
 
 int main(int argc, char **argv) {
-    GameController *gameController = GameController::getInstance();
-
+    int fd = SocketHelper::create_socket();
     return 0;
 }
